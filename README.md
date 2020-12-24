@@ -1,1 +1,1 @@
-# Laba6_OOP
+# Laba6-7_OOP
