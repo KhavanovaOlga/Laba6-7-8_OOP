@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace Laba6_OOP
 {
@@ -19,6 +20,66 @@ namespace Laba6_OOP
 		Node back = null;
 		Node endNode = new Node();
 
+		int count = 0;
+
+		private void readingShapes(StreamReader reader, ShapeFactory factory)
+		{
+			string line;
+			while ((line = reader.ReadLine()) != null && line != "")
+			{
+				char code = line[0];
+				Shape shape = factory.createShape(code);
+
+				if (shape != null)
+				{
+					if (shape is CGroup)
+					{
+						(shape as CGroup).loadGroup(reader, factory);
+						Push_back(shape);
+						continue;
+					}
+
+					shape.load(reader);
+					Push_back(shape);
+				}
+				else
+				{
+					return;
+				}
+			}
+		}
+
+		public void loadShapes(string pathToTheFile, ShapeFactory factory)
+		{
+			using (StreamReader reader = new StreamReader(pathToTheFile, System.Text.Encoding.Default))
+			{
+				readingShapes(reader, factory);
+			}
+		}
+
+		public void loadShapes(StreamReader reader, ShapeFactory factory)
+		{
+			readingShapes(reader, factory);
+		}
+
+		public void saveShapes(string pathToTheFile)
+		{
+			if (count != 0)
+			{
+				using (StreamWriter writer = new StreamWriter(pathToTheFile, false, System.Text.Encoding.Default))
+				{
+					Node current = head;
+					while (current != endNode)
+					{
+						current.key.save(writer);
+						current = current.next;
+					}
+				}
+			}
+
+		}
+
+		//Переставляем все указатели на объекты при добавлении нового
 		private void updateBackNEnd()
 		{
 			if (head == endNode)
@@ -60,20 +121,14 @@ namespace Laba6_OOP
 			updateBackNEnd();
 		}
 
-		public int count()
+		//Подсчет количества объектов
+		public int Count()
 		{
-			Node node = head;
-			int count = 0;
-			while (node != null && node != endNode)
-			{
-				count++;
-				node = node.next;
-			}
-
 			return count;
 		}
 
-		public Node search(Shape item)
+		//Для того,чтобы убедиться, что данный объект есть в List
+		public Node Search(Shape item)
 		{
 			Node node = head;
 			while (node != null && node.next != endNode && node.key != item)
@@ -89,10 +144,11 @@ namespace Laba6_OOP
 			return node;
 		}
 
-		public void insert(Shape newItem)
+		public void Insert(Shape newItem)
 		{
 			Node newNode = new Node();
 			newNode.key = newItem;
+			count++;
 
 			newNode.next = head;
 			if (head != null)
@@ -116,6 +172,7 @@ namespace Laba6_OOP
 			}
 			else
 			{
+				count++;
 				newNode.prev = back;
 				back.next = newNode;
 				back = newNode;
@@ -125,6 +182,7 @@ namespace Laba6_OOP
 			}
 		}
 
+		//удаление объекта
 		public bool remove(Shape item)
 		{
 			Node nodeToRemove;
@@ -132,6 +190,7 @@ namespace Laba6_OOP
 
 			if (nodeToRemove != null)
 			{
+				count--;
 				if (nodeToRemove.prev != null)
 				{
 					nodeToRemove.prev.next = nodeToRemove.next;
@@ -154,7 +213,7 @@ namespace Laba6_OOP
 			return false;
 		}
 
-		public ContainerIterator begin()
+		public ContainerIterator Begin()
 		{
 			if (head != null)
 			{
@@ -168,7 +227,7 @@ namespace Laba6_OOP
 			}
 		}
 
-		public ContainerIterator last()
+		public ContainerIterator Last()
 		{
 			if (back != null)
 			{
@@ -182,7 +241,7 @@ namespace Laba6_OOP
 			}
 		}
 
-		public ContainerIterator end()
+		public ContainerIterator End()
 		{
 			ContainerIterator endIterator = new ContainerIterator(endNode);
 			return endIterator;
@@ -191,6 +250,7 @@ namespace Laba6_OOP
 
 	}
 
+	//работа с итераторами в List
 	public class ContainerIterator
 	{
 		Node currentNode = null;
@@ -227,6 +287,7 @@ namespace Laba6_OOP
 			return (it1.currentNode != it2.currentNode ? true : false);
 		}
 
+		//получение индекса объекта
 		public Node getNode()
 		{
 			return currentNode;
