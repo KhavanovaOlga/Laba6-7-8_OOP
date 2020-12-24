@@ -162,7 +162,7 @@ namespace Laba6_OOP
                         }
 
                 }
-                container.push_back(newShape); //добавляем объект в список
+                container.Push_back(newShape); //добавляем объект в список
 
                 this.Invalidate(); //перерисовываем рабочее пространство
             }
@@ -310,7 +310,7 @@ namespace Laba6_OOP
         {
             if (e.ClickedItem.Text == "make a group")
             {
-                CGroup group = new CGroup(100, boarders);
+                СGroup group = new СGroup(100, boarders);
                 bool IsThereSomething = false;
                 ContainerIterator it = container.Begin();
                 while (it != container.End())
@@ -347,9 +347,9 @@ namespace Laba6_OOP
                 Container extractedShapes = new Container();
                 for (ContainerIterator it = container.Begin(); it != container.End(); ++it)
                 {
-                    if (it.getNode().key.marked == true && (it.getNode().key is CGroup))
+                    if (it.getNode().key.marked == true && (it.getNode().key is СGroup))
                     {
-                        Container shapes = ((CGroup)it.getNode().key).split();
+                        Container shapes = ((СGroup)it.getNode().key).split();
                         for (ContainerIterator it2 = shapes.Begin(); it2 != shapes.End(); ++it2)
                         {
                             extractedShapes.Push_back(it2.getNode().key);
