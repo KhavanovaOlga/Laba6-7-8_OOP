@@ -46,14 +46,26 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AbstractFactory.cs" />
+    <Compile Include="CCircle.cs" />
+    <Compile Include="Container.cs" />
+    <Compile Include="CSquare.cs" />
+    <Compile Include="CTriangle.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="ISerializable.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Shape.cs" />
+    <Compile Include="СGroup.cs" />
+    <Compile Include="СRectangle.cs" />
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -62,6 +74,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -75,6 +88,49 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\circle.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\circle %281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\rectangle.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\rectangle %281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\square-outline-48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\square-outline-32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\triangle-outline-32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\triangle-outline-48.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\circle-outline-48.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\circle-outline-32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\circle-outline-321.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\circle-outline-24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\square-outline-24.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="FormsParams.txt" />
+    <Content Include="Saves.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
